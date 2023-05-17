@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:net_flek/core/colors/colors.dart';
+import 'package:net_flek/presentation/search/widget/search_text_title.dart';
 
 
 const imageUrl = "https://www.themoviedb.org/t/p/w250_and_h141_face/hiHGRbyTcbZoLsYYkO4QiCLYe34.jpg";
@@ -14,10 +15,7 @@ class SearchIdleWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:  [
-       const Text('Top Searches',style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold
-        ),),
+      const SearchTextTitle(title: 'Top Searches',),
       const   Gap(10),
         Expanded(
           child: ListView.separated(
@@ -30,6 +28,8 @@ class SearchIdleWidget extends StatelessWidget {
     );
   }
 }
+
+
 
 
 class TopSearchItemTile extends StatelessWidget {

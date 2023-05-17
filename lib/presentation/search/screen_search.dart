@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:net_flek/presentation/search/widget/search_idle.dart';
+import 'package:net_flek/presentation/search/widget/search_result.dart';
 
 class ScreenSearch extends StatelessWidget {
   const ScreenSearch({super.key});
@@ -32,7 +33,7 @@ class ScreenSearch extends StatelessWidget {
             ),
           ),
           const Gap(10),
-          const Expanded(child: SearchIdleWidget()),
+           Expanded(child: SearchResultWidget()),
         ],
       ),
     )));
