@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:net_flek/core/colors/colors.dart';
+import 'package:net_flek/presentation/search/widget/search_idle.dart';
 
 class VideoListItem extends StatelessWidget {
   final int index;
@@ -13,15 +14,17 @@ class VideoListItem extends StatelessWidget {
         Container(
           color: Colors.accents[index % Colors.accents.length],
         ),
-       Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               // Left Side
-                Align(
-          alignment:Alignment.bottomCenter,
+              Align(
+                alignment: Alignment.bottomCenter,
                 child: CircleAvatar(
-                  backgroundColor: secondryColor,
+                  backgroundColor:secondryColor,
                   radius: 30,
                   child: IconButton(
                     onPressed: () {},
@@ -33,12 +36,16 @@ class VideoListItem extends StatelessWidget {
                   ),
                 ),
               ),
-             const Spacer(),
+              const Spacer(),
               // right Side
-              Column(
+             const Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(imageUrl),
+                    radius: 30,
+                  ),
                   VideoActionWidget(icon: Icons.emoji_emotions, title: "LOL"),
                   VideoActionWidget(icon: Icons.share, title: "Share"),
                   VideoActionWidget(icon: Icons.play_arrow, title: "Play"),
@@ -47,6 +54,7 @@ class VideoListItem extends StatelessWidget {
               )
             ],
           ),
+        ),
       ],
     );
   }
@@ -60,14 +68,19 @@ class VideoActionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
       child: Column(
-        children: [Icon(icon,size: 30),
-        const Gap(10),
-         Text(title,style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w800,
-         ),)],
+        children: [
+          Icon(icon, size: 30),
+          const Gap(10),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+            ),
+          )
+        ],
       ),
     );
   }
