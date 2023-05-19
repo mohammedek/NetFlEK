@@ -8,6 +8,7 @@ class MainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       width: 150,
       height: 250,
       decoration: BoxDecoration(

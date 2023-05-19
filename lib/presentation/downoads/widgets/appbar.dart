@@ -11,13 +11,16 @@ class AppBarWidget extends StatelessWidget {
     return SafeArea(
       child: Row(
         children: [
-          Text(text,
-              style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                ),
-              )),
+          Padding(
+            padding: const EdgeInsets.only(left: 12),
+            child: Text(text,
+                style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                  ),
+                )),
+          ),
           const Spacer(),
           const Icon(
             Icons.cast,

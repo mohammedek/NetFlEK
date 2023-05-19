@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:net_flek/presentation/home/main_card.dart';
+import 'package:net_flek/presentation/home/widgets/main_card.dart';
 import 'package:net_flek/presentation/home/widgets/main_title.dart';
+
 
 class MainTitleCard extends StatelessWidget {
   const MainTitleCard({

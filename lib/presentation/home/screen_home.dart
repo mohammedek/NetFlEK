@@ -1,49 +1,98 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:gap/gap.dart';
-import 'package:net_flek/presentation/home/main_card.dart';
-import 'package:net_flek/presentation/home/main_title_card.dart';
-import 'package:net_flek/presentation/home/screen_home.dart';
-import 'package:net_flek/presentation/home/widgets/main_title.dart';
-import 'package:net_flek/presentation/home/widgets/number_card.dart';
+import 'package:net_flek/core/constants/constants.dart';
+
+import 'package:net_flek/presentation/home/widgets/background_card.dart';
+import 'package:net_flek/presentation/home/widgets/main_title_card.dart';
+import 'package:net_flek/presentation/home/widgets/number_title_card.dart';
+
+ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListView(
-            children:[
-            const   MainTitleCard(title: 'Released in the past year',),
-              const Gap(15),
-             const MainTitleCard(title: 'Trending now'),
-              // for number card
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const MainTitle(
-                    title: "Top 10 TV Shows",
-                  ),
-                  const Gap(20),
-                  LimitedBox(
-                    maxHeight: 200,
-                    child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: List.generate(10, (index) =>
-                        NumberCard())),
-                  )
-                ],
-              ),
-              const Gap(15),
-             const MainTitleCard(title: 'Up coming'),
-              const Gap(15),
-            ],
-          ),
-        ),
-      ),
+    return SafeArea(
+      child: Scaffold(
+          body: ValueListenableBuilder(
+              valueListenable: scrollNotifier,
+              builder: (BuildContext context, index, _) {
+                return NotificationListener<UserScrollNotification>(
+                    onNotification: (notification) {
+                      final ScrollDirection direction = notification.direction;
+                      if (kDebugMode) {
+                        print(direction);
+                      }
+                      if (direction == ScrollDirection.reverse) {
+                        scrollNotifier.value = false;
+                      } else if (direction == ScrollDirection.forward) {
+                        scrollNotifier.value = true;
+                      }
+                      return true;
+                    },
+                    child: Stack(
+                      children: [
+                        ListView(
+                          children: const [
+                            BackgroundCard(),
+                            MainTitleCard(
+                              title: 'Released in the past year',
+                            ),
+                            Gap(15),
+                            MainTitleCard(title: 'Trending now'),
+                            // for number card
+                            NumberTitleCard(),
+                            Gap(15),
+                            MainTitleCard(title: 'Up coming'),
+                            Gap(15),
+                            Row()
+                          ],
+                        ),
+                        scrollNotifier.value == true
+                            ? AnimatedContainer(
+                          duration: const Duration(milliseconds: 1000),
+                                width: double.infinity,
+                                height: 90,
+                                color: Colors.black.withOpacity(0.3),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image.network(
+                                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTR90SKSWGEN9va9COKwuASsXuQS30CIrOhsR826EW&s",
+                                          height: 70,
+                                          width: 70,
+                                        ),
+                                        const Spacer(),
+                                        const Icon(
+                                          Icons.cast,
+                                          size: 30,
+                                        ),
+                                        const Gap(10),
+                                        Container(height: 30, width: 30, color: Colors.blue),
+                                      const  Gap(10),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text("TV Shows",style: kHomeTitleText),
+                                        Text("Movies",style: kHomeTitleText,),
+                                        Text("Categories",style: kHomeTitleText,),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )
+                            : SizedBox(
+                                height: 20,
+                              )
+                      ],
+                    ));
+              })),
     );
   }
 }
