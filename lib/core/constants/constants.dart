@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+
+const imageAppendUrl ="https://image.tmdb.org/t/p/w500/";
+
 // size
 
 const kWidth20 = SizedBox(width: 20,);

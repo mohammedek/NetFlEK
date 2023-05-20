@@ -11,7 +11,6 @@ class ComingSoonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Row(
-      // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
           width: 50,
@@ -36,7 +35,8 @@ class ComingSoonWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(children: [
+              Stack(
+                  children: [
                 SizedBox(
                   width: double.infinity,
                   height: 400,
@@ -59,7 +59,7 @@ class ComingSoonWidget extends StatelessWidget {
                   ),
                 ),
               ]),
-             const Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -95,7 +95,7 @@ class ComingSoonWidget extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const Gap(10),
-             const Text(
+              const Text(
                   "Fast X is a noisy actioner which pushes the limits of inventive action"
                   " set pieces "
                   "but this time stays grounded compared to the space shit they"

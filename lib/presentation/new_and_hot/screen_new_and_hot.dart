@@ -3,8 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_flek/core/colors/colors.dart';
 import 'package:net_flek/core/constants/constants.dart';
-import 'package:net_flek/presentation/home/widgets/custom_button_widget.dart';
-import 'package:net_flek/presentation/new_and_hot/screen_new_and_hot.dart';
 import 'package:net_flek/presentation/new_and_hot/widgets/coming_soon.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
@@ -66,7 +64,7 @@ class ScreenNewAndHot extends StatelessWidget {
   }
 
   Widget _buildEveryonesWatching() {
-    return SizedBox();
+    return const SizedBox();
   }
 }
 
