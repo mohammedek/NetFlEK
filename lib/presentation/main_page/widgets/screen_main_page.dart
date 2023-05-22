@@ -8,24 +8,24 @@ import 'package:net_flek/presentation/new_and_hot/screen_new_and_hot.dart';
 import 'package:net_flek/presentation/search/screen_search.dart';
 
 class ScreenMainPage extends StatelessWidget {
- const ScreenMainPage({Key? key}) : super(key: key);
+  const ScreenMainPage({Key? key}) : super(key: key);
 
-   final _pages = const [
+  final _pages = const [
     ScreenHome(),
     ScreenNewAndHot(),
     ScreenFastLaugh(),
     ScreenSearch(),
     ScreenDownload()
-   ];
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: ValueListenableBuilder(
-        valueListenable: indexChangeNotifier, 
-        builder:(context, int index,_){
-        return _pages[index];
-      }),
+          valueListenable: indexChangeNotifier,
+          builder: (context, int index, _) {
+            return _pages[index];
+          }),
       bottomNavigationBar: const BottomNavigationWidgets(),
     );
   }

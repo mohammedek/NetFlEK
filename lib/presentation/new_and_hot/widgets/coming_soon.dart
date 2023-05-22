@@ -35,8 +35,7 @@ class ComingSoonWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Stack(
-                  children: [
+              Stack(children: [
                 SizedBox(
                   width: double.infinity,
                   height: 400,

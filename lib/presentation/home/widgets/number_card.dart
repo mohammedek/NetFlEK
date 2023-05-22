@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_flek/core/colors/colors.dart';
 
-
 class NumberCard extends StatelessWidget {
   const NumberCard({super.key, required this.index});
   final int index;

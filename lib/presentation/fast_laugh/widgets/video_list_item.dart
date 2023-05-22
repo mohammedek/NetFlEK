@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:net_flek/core/colors/colors.dart';
 import 'package:net_flek/presentation/search/widget/search_idle.dart';
+import 'package:net_flek/presentation/search/widget/search_result.dart';
 
 class VideoListItem extends StatelessWidget {
   final int index;
@@ -24,7 +25,7 @@ class VideoListItem extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CircleAvatar(
-                  backgroundColor:secondryColor,
+                  backgroundColor: secondryColor,
                   radius: 30,
                   child: IconButton(
                     onPressed: () {},
@@ -38,12 +39,12 @@ class VideoListItem extends StatelessWidget {
               ),
               const Spacer(),
               // right Side
-             const Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(imageUrl),
+                    backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZQ1NF5GEvbbgGHH7hfzxhyCptMRa034D9xqBY9pQjbg&s"),
                     radius: 30,
                   ),
                   VideoActionWidget(icon: Icons.emoji_emotions, title: "LOL"),
@@ -68,7 +69,7 @@ class VideoActionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: Column(
         children: [
           Icon(icon, size: 30),

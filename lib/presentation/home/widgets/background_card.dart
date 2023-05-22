@@ -10,40 +10,38 @@ class BackgroundCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            height: 600,
-            decoration: const BoxDecoration(
-                image: DecorationImage(image: NetworkImage(kMainImage))),
+    return Stack(children: [
+      Container(
+        width: double.infinity,
+        height: 600,
+        decoration: const BoxDecoration(
+            image: DecorationImage(image: NetworkImage(kMainImage))),
+      ),
+      Positioned(
+        bottom: 0,
+        left: 0,
+        right: 0,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const CustomButtonWidget(icon: Icons.add, title: "My List"),
+              _PlayButton(),
+              const CustomButtonWidget(icon: Icons.info, title: "info"),
+            ],
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const CustomButtonWidget(icon: Icons.add, title: "My List"),
-                  _PlayButton(),
-                  const CustomButtonWidget(icon: Icons.info, title: "info"),
-                ],
-              ),
-            ),
-          ),
-        ]);
+        ),
+      ),
+    ]);
   }
 }
-
 
 TextButton _PlayButton() {
   return TextButton.icon(
     onPressed: () {},
-    style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(secondryColor)),
+    style:
+        ButtonStyle(backgroundColor: MaterialStateProperty.all(secondryColor)),
     icon: const Icon(
       Icons.play_arrow,
       size: 40,
@@ -54,9 +52,7 @@ TextButton _PlayButton() {
       child: Text(
         "Play",
         style: TextStyle(
-            color: backgroundColor,
-            fontSize: 20,
-            fontWeight: FontWeight.w700),
+            color: backgroundColor, fontSize: 20, fontWeight: FontWeight.w700),
       ),
     ),
   );

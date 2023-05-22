@@ -30,17 +30,16 @@ class ScreenDownload extends StatelessWidget {
 }
 
 class Section2 extends StatelessWidget {
-
   Section2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<DownloadsBloc>(context).add(const DownloadsEvent.getDownloadsImage());
-    });
-    final size = MediaQuery
-        .of(context)
-        .size;
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   BlocProvider.of<DownloadsBloc>(context).add(const DownloadsEvent.getDownloadsImage());
+    // });
+    BlocProvider.of<DownloadsBloc>(context)
+        .add(const DownloadsEvent.getDownloadsImage());
+    final size = MediaQuery.of(context).size;
     return Column(
       children: [
         const Text(
@@ -59,18 +58,19 @@ class Section2 extends StatelessWidget {
           ),
         ),
         const Gap(5),
-        BlocBuilder<DownloadsBloc, DownloadsState>(
-          builder: (context, state) {
-          return
-             SizedBox(
+        BlocBuilder<DownloadsBloc, DownloadsState>(builder: (context, state) {
+          if (state.isLoading) {
+            return const CircularProgressIndicator();
+          } else if (state.downloads != null && state.downloads!.length >= 3) {
+            return SizedBox(
               width: size.width,
               height: size.height / 1.7,
-              child:  state.isLoading ? const Center(child: CircularProgressIndicator()): Stack(alignment: Alignment.center, children: [
+              child: Stack(alignment: Alignment.center, children: [
                 Center(
                     child: CircleAvatar(
-                      radius: size.width * 0.47,
-                      backgroundColor: Colors.grey.shade800,
-                    )),
+                  radius: size.width * 0.46,
+                  backgroundColor: Colors.grey.shade800,
+                )),
                 DownloadsImageWidget(
                   angle: 20,
                   imageList: '$imageAppendUrl${state.downloads?[0].posterPath}',
@@ -79,7 +79,7 @@ class Section2 extends StatelessWidget {
                 ),
                 DownloadsImageWidget(
                   angle: -20,
-                  imageList:'$imageAppendUrl${state.downloads?[1].posterPath}',
+                  imageList: '$imageAppendUrl${state.downloads?[1].posterPath}',
                   margin: const EdgeInsets.only(
                     right: 160,
                     bottom: 60,
@@ -89,13 +89,16 @@ class Section2 extends StatelessWidget {
                 DownloadsImageWidget(
                     radius: 10,
                     angle: 0,
-                    imageList: '$imageAppendUrl${state.downloads?[2].posterPath}',
+                    imageList:
+                        '$imageAppendUrl${state.downloads?[2].posterPath}',
                     margin: const EdgeInsets.only(),
                     size: Size(size.width * 0.45, size.height * 0.39)),
               ]),
             );
-          },
-        ),
+          } else {
+            return const SizedBox(); // Return an empty widget or alternative content if the conditions are not met.
+          }
+        }),
       ],
     );
   }
@@ -131,7 +134,7 @@ class Section3 extends StatelessWidget {
         MaterialButton(
             onPressed: () {},
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             color: secondryColor,
             child: const Text(
               "See what you can download",
@@ -163,12 +166,13 @@ class _SmartDownloads extends StatelessWidget {
 }
 
 class DownloadsImageWidget extends StatelessWidget {
-  const DownloadsImageWidget({super.key,
-    required this.imageList,
-    this.angle = 20,
-    required this.margin,
-    required this.size,
-    this.radius = 10});
+  const DownloadsImageWidget(
+      {super.key,
+      required this.imageList,
+      this.angle = 20,
+      required this.margin,
+      required this.size,
+      this.radius = 10});
 
   final String imageList;
   final double angle;

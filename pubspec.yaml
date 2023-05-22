@@ -43,7 +43,7 @@ dependencies:
   freezed_annotation:
   flutter_bloc:
   bloc:
-  json_serializable:
+  json_serializable: ^6.7.0
   json_annotation:
   equatable:
 

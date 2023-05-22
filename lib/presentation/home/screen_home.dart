@@ -53,7 +53,7 @@ class ScreenHome extends StatelessWidget {
                         ),
                         scrollNotifier.value == true
                             ? AnimatedContainer(
-                          duration: const Duration(milliseconds: 1000),
+                                duration: const Duration(milliseconds: 1000),
                                 width: double.infinity,
                                 height: 90,
                                 color: Colors.black.withOpacity(0.3),
@@ -62,7 +62,7 @@ class ScreenHome extends StatelessWidget {
                                     Row(
                                       children: [
                                         Image.network(
-                                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTR90SKSWGEN9va9COKwuASsXuQS30CIrOhsR826EW&s",
+                                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTodOyrmNhYBaysmI-po7ol1HkG46NfWK3X9Q&usqp=CAU",
                                           height: 70,
                                           width: 70,
                                         ),
@@ -72,22 +72,32 @@ class ScreenHome extends StatelessWidget {
                                           size: 30,
                                         ),
                                         const Gap(10),
-                                        Container(height: 30, width: 30, color: Colors.blue),
-                                      const  Gap(10),
+                                        Container(
+                                            height: 30,
+                                            width: 30,
+                                            color: Colors.blue),
+                                        const Gap(10),
                                       ],
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Text("TV Shows",style: kHomeTitleText),
-                                        Text("Movies",style: kHomeTitleText,),
-                                        Text("Categories",style: kHomeTitleText,),
+                                        Text("TV Shows", style: kHomeTitleText),
+                                        Text(
+                                          "Movies",
+                                          style: kHomeTitleText,
+                                        ),
+                                        Text(
+                                          "Categories",
+                                          style: kHomeTitleText,
+                                        ),
                                       ],
                                     )
                                   ],
                                 ),
                               )
-                            : SizedBox(
+                            : const SizedBox(
                                 height: 20,
                               )
                       ],

@@ -3,10 +3,10 @@ import 'package:gap/gap.dart';
 import 'package:net_flek/presentation/home/widgets/main_card.dart';
 import 'package:net_flek/presentation/home/widgets/main_title.dart';
 
-
 class MainTitleCard extends StatelessWidget {
   const MainTitleCard({
-    super.key, required this.title,
+    super.key,
+    required this.title,
   });
   final String title;
 
@@ -15,7 +15,7 @@ class MainTitleCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         MainTitle(
+        MainTitle(
           title: title,
         ),
         const Gap(20),

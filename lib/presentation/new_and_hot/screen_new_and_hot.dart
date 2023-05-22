@@ -49,8 +49,7 @@ class ScreenNewAndHot extends StatelessWidget {
                     ]),
               )),
           body: TabBarView(
-              children: [_buildComingSoon(),
-                _buildEveryonesWatching()]),
+              children: [_buildComingSoon(), _buildEveryonesWatching()]),
         ),
       ),
     );
@@ -58,7 +57,7 @@ class ScreenNewAndHot extends StatelessWidget {
 
   Widget _buildComingSoon() {
     return ListView.builder(
-      itemBuilder: (BuildContext context,index) => const ComingSoonWidget(),
+      itemBuilder: (BuildContext context, index) => const ComingSoonWidget(),
       itemCount: 10,
     );
   }
@@ -67,5 +66,3 @@ class ScreenNewAndHot extends StatelessWidget {
     return const SizedBox();
   }
 }
-
-
