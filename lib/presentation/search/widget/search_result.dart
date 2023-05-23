@@ -6,9 +6,8 @@ import 'package:net_flek/core/constants/constants.dart';
 import 'package:net_flek/domain/search/model/search_response/search_response.dart';
 import 'package:net_flek/presentation/search/widget/search_text_title.dart';
 
-
 class SearchResultWidget extends StatelessWidget {
-  const SearchResultWidget({super.key,});
+  const SearchResultWidget({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,43 +15,67 @@ class SearchResultWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-       const  SearchTextTitle(title:" Movies and TV"),
+        const SearchTextTitle(title: " Movies and TV"),
         const Gap(10),
         Expanded(
-          child: BlocBuilder<SearchBloc,SearchState>(
+          child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
-              return GridView.count(
+              if (state.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state.isError) {
+                return const Center(
+                  child: Text(
+                    "An error occurred",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                );
+              } else if (state.searchResultList.isEmpty) {
+                return const Center(
+                  child: Text(
+                    "No Results Found",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                );
+              } else {
+                return GridView.count(
                   crossAxisCount: 3,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
                   childAspectRatio: 1 / 1.4,
-                  children: List.generate(20, (index) {
-                    final movie = state.searchResultList[index];
-                    return  MainCard(imageUrl1: movie.posterImageUrl ?? '');
-                  }));
+                  children: state.searchResultList
+                      .map((movie) =>
+                      MainCard(imageUrl: '$imageAppendUrl${movie.posterPath}'))
+                      .toList(),
+                );
+              }
             },
           ),
-        )
+        ),
       ],
     );
   }
 }
 
 class MainCard extends StatelessWidget {
-  final String imageUrl1;
+  final String imageUrl;
 
-  const MainCard({super.key,
-    required this.imageUrl1
-  });
+  const MainCard({
+    Key? key,
+    required this.imageUrl,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7),
-          image:  DecorationImage(
-              image: NetworkImage(imageUrl1),
-              fit: BoxFit.cover)),
+        borderRadius: BorderRadius.circular(7),
+        image: DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

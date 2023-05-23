@@ -29,7 +29,7 @@ class SearchIdleWidget extends StatelessWidget {
                   "Error While Loading Data"
                 ),);
               }else if(state.idleList.isEmpty){
-                const Center(child: Text(
+               return const Center(child: Text(
                     "List Empty",style: TextStyle(
                   color: secondryColor
                 ),
@@ -39,6 +39,7 @@ class SearchIdleWidget extends StatelessWidget {
                   shrinkWrap: true,
                   itemBuilder: (ctx, index) {
                     final movie = state.idleList[index];
+                    print(movie.toString());
                     return TopSearchItemTile(
                         title: movie.title ?? 'No title Provided',
                         imageUrl: '$imageAppendUrl${movie.posterPath}');

@@ -1,8 +1,8 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:net_flek/application/search/search_bloc.dart';
 import 'package:net_flek/domain/core/failures/main_failure.dart';
 import 'package:net_flek/domain/downloads/i_downloads_repo.dart';
 import 'package:net_flek/domain/downloads/models/downloads.dart';
@@ -57,10 +57,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
       //  call search movie api
       log('searching${event.movieQuery}');
-      emit(SearchState(
-          searchResultList: state.searchResultList,
+      emit(const SearchState(
+          searchResultList: [],
           idleList: [],
-          isLoading: true, isError: false));
+          isLoading: true,
+          isError: false));
       final _result =
           await _searchService.searchMovies(movieQuery:event.movieQuery);
       final _state = _result.fold(
