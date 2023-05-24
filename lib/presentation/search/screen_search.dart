@@ -5,17 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:net_flek/application/search/search_bloc.dart';
+import 'package:net_flek/domain/core/debounce/debounce.dart';
 import 'package:net_flek/presentation/search/widget/search_idle.dart';
 import 'package:net_flek/presentation/search/widget/search_result.dart';
 
 class ScreenSearch extends StatelessWidget {
-  const ScreenSearch({super.key});
+  ScreenSearch({super.key});
+
+  final _debouncer = Debouncer(milliseconds: 1*1000);
 
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       BlocProvider.of<SearchBloc>(context).add(const Initialize());
-    // });
+    });
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: SafeArea(
@@ -39,8 +42,13 @@ class ScreenSearch extends StatelessWidget {
                       color: Colors.grey.shade100,
                     ),
                     onChanged: (value) {
-                      BlocProvider.of<SearchBloc>(context).add(
-                          SearchMovie(movieQuery: value));
+                        if(value.isEmpty){
+                          return;
+                        }
+                        _debouncer.run(() {
+                        BlocProvider.of<SearchBloc>(context).add(
+                            SearchMovie(movieQuery: value));
+                      });
                     },
                   ),
                   const Gap(10),

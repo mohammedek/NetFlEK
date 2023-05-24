@@ -8,14 +8,14 @@ import 'package:net_flek/presentation/new_and_hot/screen_new_and_hot.dart';
 import 'package:net_flek/presentation/search/screen_search.dart';
 
 class ScreenMainPage extends StatelessWidget {
-  const ScreenMainPage({Key? key}) : super(key: key);
+  ScreenMainPage({Key? key}) : super(key: key);
 
-  final _pages = const [
-    ScreenHome(),
-    ScreenNewAndHot(),
-    ScreenFastLaugh(),
+  final _pages =  [
+   const ScreenHome(),
+    const ScreenNewAndHot(),
+    const ScreenFastLaugh(),
     ScreenSearch(),
-    ScreenDownload()
+    const ScreenDownload()
   ];
 
   @override

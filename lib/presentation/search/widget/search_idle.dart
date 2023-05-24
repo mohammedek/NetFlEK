@@ -30,7 +30,7 @@ class SearchIdleWidget extends StatelessWidget {
                 ),);
               }else if(state.idleList.isEmpty){
                return const Center(child: Text(
-                    "List Empty",style: TextStyle(
+                    "Noting to show",style: TextStyle(
                   color: secondryColor
                 ),
                 ),);
@@ -73,7 +73,8 @@ class TopSearchItemTile extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
               image: DecorationImage(
-                  image: NetworkImage(imageUrl), fit: BoxFit.cover)),
+                  image: NetworkImage(imageUrl),
+                  fit: BoxFit.cover)),
         ),
          const Gap(15),
          Expanded(

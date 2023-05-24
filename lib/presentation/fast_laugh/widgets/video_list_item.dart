@@ -1,8 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:net_flek/core/colors/colors.dart';
-import 'package:net_flek/presentation/search/widget/search_idle.dart';
-import 'package:net_flek/presentation/search/widget/search_result.dart';
+import 'package:net_flek/core/constants/constants.dart';
+import 'package:net_flek/domain/downloads/models/downloads.dart';
+
+class VideoListItemInheritedWidget extends InheritedWidget {
+  final Widget widget;
+  final Downloads movieData;
+  const VideoListItemInheritedWidget({
+    super.key,
+    required this.widget,
+    required this.movieData,
+  }) : super(child: widget);
+
+  @override
+  bool updateShouldNotify(covariant VideoListItemInheritedWidget oldWidget) {
+    return oldWidget.movieData != movieData;
+  }
+
+  static VideoListItemInheritedWidget? of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<VideoListItemInheritedWidget>();
+  }
+}
 
 class VideoListItem extends StatelessWidget {
   final int index;
@@ -10,6 +30,8 @@ class VideoListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final posterPath =
+        VideoListItemInheritedWidget.of(context)?.movieData.posterPath;
     return Stack(
       children: [
         Container(
@@ -39,18 +61,22 @@ class VideoListItem extends StatelessWidget {
               ),
               const Spacer(),
               // right Side
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZQ1NF5GEvbbgGHH7hfzxhyCptMRa034D9xqBY9pQjbg&s"),
+                    backgroundImage: posterPath == null
+                        ? null
+                        : NetworkImage('$imageAppendUrl$posterPath'),
                     radius: 30,
                   ),
-                  VideoActionWidget(icon: Icons.emoji_emotions, title: "LOL"),
-                  VideoActionWidget(icon: Icons.share, title: "Share"),
-                  VideoActionWidget(icon: Icons.play_arrow, title: "Play"),
-                  Gap(20),
+                  const VideoActionWidget(
+                      icon: Icons.emoji_emotions, title: "LOL"),
+                  const VideoActionWidget(icon: Icons.share, title: "Share"),
+                  const VideoActionWidget(
+                      icon: Icons.play_arrow, title: "Play"),
+                  const Gap(20),
                 ],
               )
             ],

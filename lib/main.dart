@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:net_flek/application/downloads/downloads_bloc.dart';
+import 'package:net_flek/application/fast_laugh/fast_laugh_bloc.dart';
 import 'package:net_flek/application/search/search_bloc.dart';
 import 'package:net_flek/core/colors/colors.dart';
 import 'package:net_flek/domain/core/di/injectable.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (ctx) => getIt<DownloadsBloc>()),
-        BlocProvider(create: (ctx) => getIt<SearchBloc>())
+        BlocProvider(create: (ctx) => getIt<SearchBloc>()),
+        BlocProvider(create: (ctx) => getIt<FastLaughBloc>()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
               bodySmall: TextStyle(color: Colors.white),
               titleLarge: TextStyle(color: Colors.white),
             )),
-        home: const ScreenMainPage(),
+        home: ScreenMainPage(),
       ),
     );
   }

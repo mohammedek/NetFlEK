@@ -46,7 +46,7 @@ class SearchResultWidget extends StatelessWidget {
                   childAspectRatio: 1 / 1.4,
                   children: state.searchResultList
                       .map((movie) =>
-                      MainCard(imageUrl: '$imageAppendUrl${movie.posterPath}'))
+                      MainCard(imageUrl: movie.posterImageUrl))
                       .toList(),
                 );
               }
