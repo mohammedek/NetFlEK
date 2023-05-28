@@ -23,7 +23,7 @@ class ScreenFastLaugh extends StatelessWidget {
         } else if (state.isError) {
           const Center(child: Text("Error while getting data"));
         } else if (state.videosList.isEmpty) {
-          const Center(child: Text("Video list empty"));
+          const Center(child: Text("Video List is  empty"));
         }
         return PageView(
             scrollDirection: Axis.vertical,
